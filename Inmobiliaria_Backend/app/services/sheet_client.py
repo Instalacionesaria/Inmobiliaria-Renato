@@ -12,6 +12,7 @@ Cada pestaña tiene la misma estructura general:
 
 from __future__ import annotations
 
+import base64
 import json
 import logging
 import threading
@@ -53,8 +54,18 @@ class SheetClient:
         # En producción (EasyPanel, etc.) la service account viaja como JSON
         # en una env var. En dev local, como archivo en disco. Soportamos
         # ambos modos — JSON env var tiene prioridad si está presente.
+        #
+        # El JSON env var puede venir en dos formatos (auto-detectamos):
+        #   1) JSON crudo: empieza con `{`
+        #   2) Base64 del JSON: cualquier otra cosa
+        # Recomendamos base64 en paneles tipo EasyPanel/Coolify porque son
+        # propensos a mutilar las comillas/escapes del JSON crudo.
         if settings.google_service_account_json:
-            info = json.loads(settings.google_service_account_json)
+            raw = settings.google_service_account_json.strip()
+            if raw.startswith("{"):
+                info = json.loads(raw)
+            else:
+                info = json.loads(base64.b64decode(raw).decode("utf-8"))
             creds = Credentials.from_service_account_info(info, scopes=SCOPES)
         elif settings.google_service_account_file:
             creds = Credentials.from_service_account_file(
