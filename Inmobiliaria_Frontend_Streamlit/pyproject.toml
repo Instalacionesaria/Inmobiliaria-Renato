@@ -1,0 +1,9 @@
+[project]
+name = "inmobiliaria-frontend-streamlit"
+version = "0.1.0"
+description = "UI de prueba en Streamlit para conversar con el agente de Inmobiliaria_Backend sin pasar por WhatsApp/HighLevel."
+requires-python = ">=3.12"
+dependencies = [
+    "streamlit>=1.39.0",
+    "httpx>=0.28.1",
+]

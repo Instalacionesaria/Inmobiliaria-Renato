@@ -1,0 +1,125 @@
+# =====================================================================
+# Secretos y credenciales — NUNCA versionar
+# =====================================================================
+
+# Variables de entorno (todos los flavors)
+**/.env
+**/.env.local
+**/.env.development
+**/.env.production
+**/.env.staging
+**/.env.*.local
+
+# PERMITIR los .env.example (son plantillas que sí se versionan)
+!**/.env.example
+
+# Google Service Accounts y otros JSON de credenciales
+**/*-service-account*.json
+**/probando-francisco-*.json
+**/credentials.json
+**/client_secret*.json
+**/serviceAccount*.json
+
+# Carpeta genérica de secretos
+**/secrets/
+
+# Tokens, llaves
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+
+# =====================================================================
+# Configuración local de herramientas
+# =====================================================================
+
+# Claude Code (config local del usuario)
+.claude/settings.local.json
+**/.claude/settings.local.json
+
+# Vercel (linkea al proyecto, contiene project_id privado)
+**/.vercel/
+
+# =====================================================================
+# Python
+# =====================================================================
+
+**/__pycache__/
+**/*.py[oc]
+**/.venv/
+**/venv/
+**/.python-version
+**/build/
+**/dist/
+**/wheels/
+**/*.egg-info/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# =====================================================================
+# Node / Frontend
+# =====================================================================
+
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/.vite/
+**/.next/
+**/.turbo/
+**/*.local
+
+# =====================================================================
+# Streamlit
+# =====================================================================
+
+**/.streamlit/secrets.toml
+
+# =====================================================================
+# Bases de datos locales
+# =====================================================================
+
+**/data/*.db
+**/data/*.sqlite
+**/data/*.sqlite3
+
+# =====================================================================
+# Logs y archivos temporales
+# =====================================================================
+
+**/*.log
+**/logs/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# =====================================================================
+# Editores e IDEs
+# =====================================================================
+
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*.sw?
+*.suo
+
+# =====================================================================
+# macOS / Windows / Linux
+# =====================================================================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =====================================================================
+# Archivos personales / comerciales que NO se versionan
+# =====================================================================
+
+# Documentos internos (propuestas comerciales con precios y datos de cliente)
+Documentos/
+
+# Notas y comandos personales
+Comandos.md

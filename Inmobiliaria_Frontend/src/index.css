@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Consolas, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #09090b; /* zinc-950 */
+  color: #e4e4e7; /* zinc-200 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection color */
+::selection {
+  background: #4338ca; /* indigo-700 */
+  color: #fff;
+}
+
+/* Subtle grid pattern background for the hero side */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+
+/* Glow blob */
+.bg-glow {
+  background: radial-gradient(
+      ellipse at top left,
+      rgba(99, 102, 241, 0.25),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at bottom right,
+      rgba(168, 85, 247, 0.2),
+      transparent 50%
+    );
+}
