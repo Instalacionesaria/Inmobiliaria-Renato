@@ -17,6 +17,7 @@ class Settings(BaseModel):
     highlevel_api_base_url: str = "https://services.leadconnectorhq.com"
     highlevel_api_version: str = "2021-04-15"
     google_service_account_file: str | None = None
+    google_service_account_json: str | None = None
     sheet_id: str | None = None
     db_user: str | None = None
     db_password: str | None = None
@@ -53,6 +54,7 @@ def get_settings() -> Settings:
         highlevel_api_token=os.getenv("HIGHLEVEL_API_TOKEN"),
         highlevel_location_id=os.getenv("LOCATION_ID"),
         google_service_account_file=os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE"),
+        google_service_account_json=os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"),
         sheet_id=os.getenv("SHEET_ID"),
         db_user=os.getenv("DB_USER"),
         db_password=os.getenv("DB_PASSWORD"),

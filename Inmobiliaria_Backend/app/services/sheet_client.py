@@ -12,6 +12,7 @@ Cada pestaña tiene la misma estructura general:
 
 from __future__ import annotations
 
+import json
 import logging
 import threading
 import time
@@ -46,13 +47,24 @@ class SheetClient:
 
     def _client(self) -> gspread.Client:
         settings = get_settings()
-        if not settings.google_service_account_file:
-            raise RuntimeError("GOOGLE_SERVICE_ACCOUNT_FILE no configurado")
         if not settings.sheet_id:
             raise RuntimeError("SHEET_ID no configurado")
-        creds = Credentials.from_service_account_file(
-            settings.google_service_account_file, scopes=SCOPES
-        )
+
+        # En producción (EasyPanel, etc.) la service account viaja como JSON
+        # en una env var. En dev local, como archivo en disco. Soportamos
+        # ambos modos — JSON env var tiene prioridad si está presente.
+        if settings.google_service_account_json:
+            info = json.loads(settings.google_service_account_json)
+            creds = Credentials.from_service_account_info(info, scopes=SCOPES)
+        elif settings.google_service_account_file:
+            creds = Credentials.from_service_account_file(
+                settings.google_service_account_file, scopes=SCOPES
+            )
+        else:
+            raise RuntimeError(
+                "Configurá GOOGLE_SERVICE_ACCOUNT_JSON (contenido) o "
+                "GOOGLE_SERVICE_ACCOUNT_FILE (path al .json)"
+            )
         return gspread.authorize(creds)
 
     def _parse_worksheet(self, ws: gspread.Worksheet) -> dict[str, dict[str, Any]]:

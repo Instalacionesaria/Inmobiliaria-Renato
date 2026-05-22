@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[oc]
+.env
+.env.local
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.log
+data/
+scripts/
+README.md
+prompt_para_copiar.md
+*-service-account*.json
+probando-francisco-*.json
